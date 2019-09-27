@@ -7,50 +7,55 @@ project 1 - A Random Quote Generator
 
 
 /*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
+  The array 'quotes' contains five objects that carry the information of quotes.
+  The contents of objects are labeled with keys: `quote`,`source`, `citation`, `year`.
 ***/
 
-
+var quotes=[{quote: "Science knows no country, because knowledge belongs to humanity, and is the torch which illuminates the world.", source: "Einstein", citation: "speech", year: "1846"}, {quote: "The very nature of science is discoveries, and the best of those discoveries are the ones you don't expect.", source: "Neil Tyson", citation: "", year: "1968"}, {quote: "Bad times have a scientific value. These are occasions a good learner would not miss.", source: "poem", citation: "Ralph Emerson", year: "1857"}, {quote: "Science is the captain, and practice the soldiers.", source: "Leonardo da Vinci", citation: "", year: "1754"}, {quote: "The function of sociology, as of every science, is to reveal that which is hidden.", source: "Pierre Bourdieu", citation: "", year: "1937"}];
 
 
 /***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
+`getRandomQuote` function returns a random object from the array 'quotes'
 ***/
-
-
-
+function getRandomQuote(){
+var random=Math.random();
+var num=Math.floor((quotes.length)* (random));
+return quotes[num];
+}
 
 /***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
+`printQuote` function:
+   - Calls the `getRandomQuote` function and assign it to a variable.
+   - Uses an if statement to check for the `source`, `citation`, `year` properties 
+   - Creates a string variable with the contents of the random quote variable and combines it to the HTML string.
+   - closes with a final `p` tag.
+   - Sets the `innerHTML` of the `quote-box` div to the HTML string. 
 ***/
 
+function printQuote(){
+var result=getRandomQuote();
 
+var empty='';
+empty=empty+
+  "<p class=\"quote\">" +result["quote"] +"</p> \n<p class=\"source\">" +result["source"];
+var it=empty.concat(result);
 
+if ('ciation' in result){
+empty=empty+"<span class=\"citation\">" +result["citation"]+ "</span>"
+}
+
+if ('year' in result){
+  empty=empty+"<span class=\"year\"> "+result["year"]+" </span>"
+}
+
+empty=empty+"</p>"
+document.getElementById("quote-box").innerHTML = empty;
+}
 
 /***
   When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
+  is triggered, and it invokes the `printQuote` 
+  function. 
 ***/
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
